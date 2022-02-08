@@ -1,10 +1,13 @@
 package com.weme.webservice.api;
 
+import com.weme.webservice.api.APIService;
 import com.weme.webservice.domain.AnimalRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,18 +18,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-@RequiredArgsConstructor
 @RestController
-@Data
 public class APIController {
-    //private APIService apiService;
 
+    @Autowired
+    APIService apiService=new APIService();
 
     //보호소 동물 정보
     @GetMapping("/animalapi")
     public String callanimalapi(){
         StringBuffer result=new StringBuffer();
         String jsonPrintString=null;
+
+
         try{
             String start="20220201";
             String end="20220208";
@@ -47,12 +51,12 @@ public class APIController {
                 result.append(returnLine+"\n\r");
             }
 
+
             //xml-> json 변환
             JSONObject jsonObject=XML.toJSONObject(result.toString());
             jsonPrintString=jsonObject.toString();
 
-            //?
-            //apiService.init(jsonPrintString);
+            apiService.init(jsonPrintString);
 
             urlConnection.disconnect();
         }catch (Exception e){
