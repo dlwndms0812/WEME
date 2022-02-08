@@ -3,7 +3,7 @@
 불안정한 환경에 놓인 동물들의 올바른 입양을 돕는 사이트 WEME의 서버
 
 **BackEnd Member**
-- 이수현()
+- 이수현(LeeSuhyun58)
 - 이주은(dlwndms0812)
 
 **Development Enviroment**
