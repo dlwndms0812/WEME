@@ -20,16 +20,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+//@RequiredArgsConstructor
 public class APIService {
 
     @Autowired
     private AnimalRepository animalRepository;
 
-    /*
     public APIService(AnimalRepository animalRepository){
 
         this.animalRepository=animalRepository;
-    }*/
+    }
 
     public APIService(){
 
@@ -39,6 +39,7 @@ public class APIService {
     public JSONObject init(String jsonData) {
         JSONObject return_json=null;
 
+        Animal animal=new Animal();
         try {
             JSONObject jObj;
             JSONParser jsonParser = new JSONParser();
@@ -54,7 +55,7 @@ public class APIService {
 
                 return_json = (JSONObject) jObj.get(i);
 
-                Animal animal = Animal.builder()
+                animal = Animal.builder()
                         .age(jObj.get("age").toString())
                         .careAddr(jObj.get("careAddr").toString())
                         .careNm(jObj.get("careNm").toString())
@@ -80,14 +81,15 @@ public class APIService {
                         .build();
 
 
-                Animal animal1=animalRepository.save(animal); //이부분 null 오류
+                animalRepository.save(animal); //이부분 null 오류
             }
         } catch (JSONException e){
             System.out.println(e.getMessage());
         }catch (ParseException ee){
             System.out.println(ee.getMessage());
+        } catch (NullPointerException eee){
+            System.out.println((eee.getMessage()));
         }
-
         return return_json;
     }
 
