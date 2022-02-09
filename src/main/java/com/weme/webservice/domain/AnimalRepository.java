@@ -8,9 +8,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 //Animal 저장
 @Repository
-@Component
+@Transactional(readOnly = true)
 public interface AnimalRepository extends JpaRepository<Animal, String>  {
 }

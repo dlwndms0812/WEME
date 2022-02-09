@@ -16,27 +16,30 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
 public class APIService {
 
     @Autowired
-    private static AnimalRepository animalRepository;
+    private AnimalRepository animalRepository;
 
+    /*
     public APIService(AnimalRepository animalRepository){
 
         this.animalRepository=animalRepository;
-    }
+    }*/
 
     public APIService(){
 
     }
     //jsonData를 JSONParser를 통해 분해
-    public void init(String jsonData) {
+    @Transactional
+    public JSONObject init(String jsonData) {
+        JSONObject return_json=null;
 
         try {
-
             JSONObject jObj;
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonData);
@@ -46,46 +49,46 @@ public class APIService {
             JSONArray array=(JSONArray) item.get("item");
 
 
-            for(int i=0;i< array.size();i++){
-                jObj=(JSONObject) array.get(i);
+            for(int i=0;i< array.size();i++) {
+                jObj = (JSONObject) array.get(i);
 
-                    Animal animal = Animal.builder()
-                            .age(jObj.get("age").toString())
-                            .careAddr(jObj.get("careAddr").toString())
-                            .careNm(jObj.get("careNm").toString())
-                            .careTel(jObj.get("careTel").toString())
-                            .chargeNm(jObj.get("chargeNm").toString())
-                            .colorCd(jObj.get("colorCd").toString())
-                            .desertionNo(jObj.get("desertionNo").toString())
-                            .filename(jObj.get("filename").toString())
-                            .happenDt(Integer.parseInt(jObj.get("happenDt").toString()))
-                            .happenPlace(jObj.get("happenPlace").toString())
-                            .kindCd(jObj.get("kindCd").toString())
-                            .neuterYn(jObj.get("neuterYn").toString())
-                            .noticeEdt(Integer.parseInt(jObj.get("noticeEdt").toString()))
-                            .noticeNo(jObj.get("noticeNo").toString())
-                            .noticeSdt(Integer.parseInt(jObj.get("noticeSdt").toString()))
-                            .officetel(jObj.get("officetel").toString())
-                            .orgNm(jObj.get("orgNm").toString())
-                            .popfile(jObj.get("popfile").toString())
-                            .processState(jObj.get("processState").toString())
-                            .sexCd(jObj.get("sexCd").toString())
-                            .specialMark(jObj.get("specialMark").toString())
-                            .weight(jObj.get("weight").toString())
-                            .build();
+                return_json = (JSONObject) jObj.get(i);
 
-
-                    animalRepository.save(animal); //이부분 null 오류
-                }
+                Animal animal = Animal.builder()
+                        .age(jObj.get("age").toString())
+                        .careAddr(jObj.get("careAddr").toString())
+                        .careNm(jObj.get("careNm").toString())
+                        .careTel(jObj.get("careTel").toString())
+                        .chargeNm(jObj.get("chargeNm").toString())
+                        .colorCd(jObj.get("colorCd").toString())
+                        .desertionNo(jObj.get("desertionNo").toString())
+                        .filename(jObj.get("filename").toString())
+                        .happenDt(Integer.parseInt(jObj.get("happenDt").toString()))
+                        .happenPlace(jObj.get("happenPlace").toString())
+                        .kindCd(jObj.get("kindCd").toString())
+                        .neuterYn(jObj.get("neuterYn").toString())
+                        .noticeEdt(Integer.parseInt(jObj.get("noticeEdt").toString()))
+                        .noticeNo(jObj.get("noticeNo").toString())
+                        .noticeSdt(Integer.parseInt(jObj.get("noticeSdt").toString()))
+                        .officetel(jObj.get("officetel").toString())
+                        .orgNm(jObj.get("orgNm").toString())
+                        .popfile(jObj.get("popfile").toString())
+                        .processState(jObj.get("processState").toString())
+                        .sexCd(jObj.get("sexCd").toString())
+                        .specialMark(jObj.get("specialMark").toString())
+                        .weight(jObj.get("weight").toString())
+                        .build();
 
 
+                Animal animal1=animalRepository.save(animal); //이부분 null 오류
+            }
         } catch (JSONException e){
             System.out.println(e.getMessage());
         }catch (ParseException ee){
             System.out.println(ee.getMessage());
         }
 
-
+        return return_json;
     }
 
 }
