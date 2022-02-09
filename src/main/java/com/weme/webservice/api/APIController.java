@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-@RestController
+@Controller
 public class APIController {
 
     @Autowired
@@ -32,6 +32,7 @@ public class APIController {
     //보호소 동물 정보
     @GetMapping("/animalapi")
     public String callanimalapi(){
+        //결과값 저장
         StringBuffer result=new StringBuffer();
         String jsonPrintString=null;
 
@@ -65,6 +66,7 @@ public class APIController {
             JSONObject jsonObject=XML.toJSONObject(result.toString());
             jsonPrintString=jsonObject.toString();
 
+            //jsonData를 분해하기 위함
             apiService.init(jsonPrintString);
 
             urlConnection.disconnect();

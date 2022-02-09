@@ -37,11 +37,11 @@ public class APIService {
     //jsonData를 JSONParser를 통해 분해
     @Transactional
     public JSONObject init(String jsonData) {
-        JSONObject return_json=null;
-
+        //결과값 저장
+        JSONObject jObj=null;
         Animal animal=new Animal();
         try {
-            JSONObject jObj;
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonData);
             JSONObject parseResponse=(JSONObject) jsonObject.get("response");
@@ -52,8 +52,6 @@ public class APIService {
 
             for(int i=0;i< array.size();i++) {
                 jObj = (JSONObject) array.get(i);
-
-                return_json = (JSONObject) jObj.get(i);
 
                 animal = Animal.builder()
                         .age(jObj.get("age").toString())
@@ -90,7 +88,7 @@ public class APIService {
         } catch (NullPointerException eee){
             System.out.println((eee.getMessage()));
         }
-        return return_json;
+        return jObj;
     }
 
 }
