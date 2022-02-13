@@ -1,5 +1,6 @@
 package com.weme.webservice.Entity;
 
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -48,6 +49,7 @@ public class Posts {
     @Column
     private String posts_url;
 
+    @Builder
     public Posts(String id, String title, String image, String animal_name, String animal_kinds, String animal_gender, String animal_size, String animal_feature, String animal_age, Integer animal_vaccine, Integer animal_neuter, String animal_area1, String animal_area2, String context, String posts_date, String board_id, String posts_num, String posts_url) {
         this.id = id;
         this.title = title;
@@ -92,4 +94,14 @@ public class Posts {
                 ", posts_url='" + posts_url + '\'' +
                 '}';
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    //public String getPost_date() {return posts_date;}
 }

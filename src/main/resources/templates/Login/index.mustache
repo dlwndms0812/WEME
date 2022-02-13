@@ -1,0 +1,27 @@
+<h1>스프링부트 시작하는 웹서비스 ver2</h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/newBoard" role = "button" class="btn btn-primary"> 글 등록 </a>
+        </div>
+    </div>
+    <br>
+    <table class="table table-horizontal table-bordered">
+        <thread class="thread-strong">
+        <tr>
+            <th> 작성자 </th>
+            <th> 제목 </th>
+            <th> 작성일 </th>
+        </tr>
+        </thread>
+        <tbody id="tbody">
+        {{#posts}}
+            <tr>
+                <td>{{id}}</td>
+                <td><a href="/Login/deleteBoard/{{id}}">{{title}}</td></a>
+
+            </tr>
+        {{/posts}}
+        </tbody>
+    </table>
+</div>
