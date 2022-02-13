@@ -1,7 +1,12 @@
 package com.weme.webservice.DTO;
 
 import com.weme.webservice.Entity.User;
+import lombok.*;
 
+@Data
+@NoArgsConstructor
+@ToString
+@Builder
 public class userform {
 
     private String id;

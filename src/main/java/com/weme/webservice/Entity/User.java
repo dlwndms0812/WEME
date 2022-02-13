@@ -1,18 +1,18 @@
 package com.weme.webservice.Entity;
 
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity //DB가 해당 객체를 인식 가능
+@Getter
+@Builder
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class User {
 
     @Id //대표값을 지정
-    //@GeneratedValue //-> 1,2,3... 자동 생성 어노테이션
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)//-> 1,2,3... 자동 생성 어노테이션
     private String id;
 
     @Column
