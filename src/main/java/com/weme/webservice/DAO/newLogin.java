@@ -1,8 +1,8 @@
 package com.weme.webservice.DAO;
 
-import com.weme.webservice.DTO.userform;
-import com.weme.webservice.Entity.User;
+import com.weme.webservice.DTO.userDto;
+import com.weme.webservice.Entity.UserEntity;
 
 public interface newLogin {
-    User saveinfo(userform userfm);
+    UserEntity saveinfo(userDto userdto);
 }
