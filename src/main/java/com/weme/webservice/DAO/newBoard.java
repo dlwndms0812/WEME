@@ -1,8 +1,8 @@
 package com.weme.webservice.DAO;
 
-import com.weme.webservice.DTO.postsform;
-import com.weme.webservice.Entity.Posts;
+import com.weme.webservice.DTO.postsDto;
+import com.weme.webservice.Entity.PostsEntity;
 
 public interface newBoard {
-    Posts saveBoard(postsform postsfm);
+    PostsEntity saveBoard(postsDto postsfm);
 }

@@ -1,7 +1,7 @@
 package com.weme.webservice.Service;
 
-import com.weme.webservice.DTO.userform;
-import com.weme.webservice.Entity.User;
+import com.weme.webservice.DTO.userDto;
+import com.weme.webservice.Entity.UserEntity;
 import com.weme.webservice.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +19,13 @@ public class newLoginService {
 
     //새로운 회원 가입
     //기존의 회원이 회원가입을 하려고 시도하는 경우 -> if 문으로 걸러내기
-   public User saveInfo(userform usefm) {
+   public UserEntity saveInfo(userDto userdto) {
         //DTP -> Entity
-        User newuser = usefm.toEntity();
+        UserEntity newuser = userdto.toEntity();
         System.out.println(newuser.toString());
 
         //Repository에게 Entity를 DB 안에 저장
-        User savedUser = userRepository.save(newuser);
+        UserEntity savedUser = userRepository.save(newuser);
         //System.out.println(savedUser.toString());
 
         return savedUser;
